@@ -1,4 +1,6 @@
 from django.shortcuts import render
+
+from rest_framework import viewsets
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
@@ -53,3 +55,18 @@ class HelloApiView(APIView):
         """deletes an object"""
 
         return Response({'message':'delete'})
+
+
+class HelloViewSet(viewsets.ViewSet):
+    """Test API ViewSet"""
+
+    def list(self,request):
+        """Return a hello Message"""
+
+        a_viewset = [
+            'uses actions (list , create , retrieve , update , partial_update)',
+            'automatically maps to URLs using routers',
+            'Provides more functionality with less code',
+        ]
+
+        return Response({'message':'Hello!','a_viewset':a_viewset})
