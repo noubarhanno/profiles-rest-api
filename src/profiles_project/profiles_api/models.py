@@ -62,3 +62,19 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
         """django uses this when it needs to convert the object to a string"""
 
         return self.email
+
+
+class ProfileFeedItem(models.Model):
+    """Profile Status Update"""
+
+    user_profile = models.ForeignKey('UserProfile', on_delete=models.CASCADE)
+    # models.cascade means when the user delete the profile or the record from UserProfile just go an delete all the related
+    # records in ProfileFeedItem model
+    status_text = models.CharField(max_length=255)
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        """represent the model as a string"""
+        return self.status_text
+
+        
